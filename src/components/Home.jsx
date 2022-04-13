@@ -46,6 +46,8 @@ const Home = () => {
           <button className="btn btn-sm btn-dark" onClick={handleSearch} >Search</button>
         </div>
 
+        
+
         {filterData.length > 1
           ? filterData.map((ele, index) => <Card data={ele} index={index} />)
           : data.map((ele, index) => <Card data={ele} index={index} />)}

@@ -3,30 +3,37 @@ import React, { useEffect, useState } from "react";
 import ReactCardFlip from "react-card-flip";
 import Heart from "react-animated-heart";
 
-const Card = ({ data }) => {
+const Card = ({ data,index, }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [isClick, setClick] = useState(false);
-
 
   const handleClick = () => {
     setIsFlipped(!isFlipped);
   };
 
-  const handleLiked = (data) => {
-    setClick(!isClick)
+  const handleLiked = (data, i) => {
+    setClick(!isClick);
 
-    if(!isClick){
-
-      let liked = []
-      
-      if(localStorage.getItem('liked')){
-        liked = JSON.parse(localStorage.getItem('liked'))
+    let liked = [];
+    if (!isClick) {
+      if (localStorage.getItem("liked")) {
+        liked = JSON.parse(localStorage.getItem("liked"));
       }
-      liked.push(data)
-      localStorage.setItem('liked',JSON.stringify(liked))
+      liked.push(data);
+      localStorage.setItem("liked", JSON.stringify(liked));
+      console.log('Liked if ==>> ',liked)
+    } else {
+      const characters = localStorage.getItem('liked');
+      const likedArray = JSON.parse(characters);
       
-    }
+      likedArray.splice(i,1)
+      // const filteredarray = likedArray.filter((ele) => ele.id !== data.id);
+      localStorage.setItem('liked', JSON.stringify(likedArray));
+      // // alert('Unliked It !!');
+      // console.log('Liked data ',liked)
+      console.log('characters==>> ',likedArray) 
 
+    }
   };
 
   return (
@@ -39,8 +46,11 @@ const Card = ({ data }) => {
             src={data.image}
             alt="Card image cap"
           />
-          <p style={{position:'absolute',bottom:'-50px',right:'-10px'}}>
-            <Heart isClick={isClick} onClick={() => handleLiked(data.name)} />
+          <p style={{ position: "absolute", bottom: "-50px", right: "-10px" }}>
+            <Heart
+              isClick={isClick}
+              onClick={() => handleLiked(data.name, index)}
+            />
           </p>
         </div>
 
