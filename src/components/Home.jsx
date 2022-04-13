@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from "react";
-
-// import BackCard from "./BackCard";
-// import FrontCard from "./FrontCard";
 import axios from "axios";
 import Card from "./Card";
 
 const Home = () => {
 
-    
-  // const [show, setShow] = useState(false);
   const [search, setSearch] = useState('');
   const [data, setData] = useState([]);
   const [filterData, setFilterData] = useState([]);
@@ -17,15 +12,12 @@ const Home = () => {
     const URL = `https://rickandmortyapi.com/api/character`;
     axios.get(URL).then((res) => {
       setData([...res.data.results]);
-      // console.log('===>>',res.data.results)
     });
-  }, [search]);
+  }, []);
 
-  console.log("data", data);
+
 
   const handleSearch = (e) => {
-    // console.log("search data", e.target.value);
-    // setShow(!show)
 
     setFilterData(
       data.filter((ele) => {
