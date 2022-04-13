@@ -21,7 +21,7 @@ const Home = () => {
 
     setFilterData(
       data.filter((ele) => {
-        if (ele.name.toLowerCase() === search) {
+        if (ele.name.toLowerCase().includes(search)) {
           return ele;
         }
         else if(ele.status.toLowerCase() == search){
